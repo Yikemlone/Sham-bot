@@ -1,6 +1,8 @@
 # Sham-bot
 Sham bot is a Discord bot using JavaScript.
 
+***NOTE: YOU NEED TO MAKE A ".env" FILE AND PUT IT IN YOUR REPO YOU PULL, IT WILL NEED TO HAVE THE TOKEN. DON'T UPLOAD THE ".env" FILE***
+
 # Styling
 We wanna try and keep the styling of code consistent.
 
