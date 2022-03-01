@@ -8,23 +8,10 @@ config({
 
 bot.on("ready", () => {
     console.log("The bot is online.");
-
-    // bot.user.setPresence({
-    //     status: "Booba",
-    //     game: {
-    //         name: "Boing",
-    //         type: "WATCHING"
-    //     }
-    // })
-
-    // console.log (`I'm online!, my name is ${client.user.username}`);
-     
-    bot.user.setPresence({
-        status: "Online",
-        game: {
-            name: "you being quiet",
+    
+    bot.user.setActivity("you playing with my tits", 
+        {
             type: "WATCHING"
-        }
     });
 })
 
