@@ -12,19 +12,11 @@ const intentsList = [
     Intents.FLAGS.GUILD_WEBHOOKS
 ];
 
-// Creating the bot 
-const bot = new Client({ intents: intentsList});
 
-// Reading the .env file
-config({
-    path: "../.env"
-});
-
-// Command prefix for the bot
-const prefix = "!";
-
-// Setting up a collection to add commands
-bot.commands = new Collection();
+const bot = new Client({ intents: intentsList}); // Creating the bot 
+config({ path: "../.env" }); // Reading the .env file
+const prefix = "!"; // Command prefix for the bot, so all commands should use this
+bot.commands = new Collection(); // Setting up a collection to add commands
 
 
 // Setting up the bot and it's status
@@ -37,7 +29,8 @@ const commandsDir = "./commands/";
 
 // Populating the list of commands that are in file in the commands folder
 readdirSync(commandsDir).forEach(dir => {
-    console.log(dir);
+    const pull = require(commandsDir + dir);
+    if(typeof pull.name !== undefined) bot.commands.set(pull.name, pull);
 });
 
 
@@ -49,10 +42,12 @@ bot.on("messageCreate", (message) => {
 
     if(message.content.indexOf(prefix) !== 0) return; // This makes sure the user typed a command
 
-    const command = bot.commands.get(message);
+    const args = message.content.split(/\s+/g); // Don't ask me, it's a regex or something 
+    const commandName = args.shift().split(prefix)[1]; 
+    const command = bot.commands.get(commandName);
 
     try {
-        command.execute(message);
+        command.execute(message, args, bot);
     } catch(error) {
         console.log("An error occured when trying to run a command. Error message: " + error.message);
         message.reply("That's not a command we can use, idiot.");
