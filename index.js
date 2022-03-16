@@ -8,8 +8,8 @@ config({
 
 bot.on("ready", () => {
     console.log("The bot is online.");
-    
-    bot.user.setActivity("you playing with my tits", 
+
+    bot.user.setActivity("you play with my tits", 
         {
             type: "WATCHING"
     });
