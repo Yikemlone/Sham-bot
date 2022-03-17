@@ -1,6 +1,7 @@
 const {Client, Collection, Intents} = require("discord.js"); // We only need the Client and collection for this right now
 const { readdirSync } = require('fs'); // We use this to read commands from folders
 const { config } = require("dotenv"); // We need this to read the .env file
+const { channel } = require("diagnostics_channel");
 
 // 32757 is the max value for intents, which adds up to all the FLAGS below, but if we don't want the bot to do something we will
 // take them out of this list.
@@ -55,4 +56,43 @@ bot.on("messageCreate", (message) => {
 
 });
 
+
+bot.on("presenceUpdate", (oldPresence, newPresence) => {
+    userId = newPresence.userId;
+    newStatus =  newPresence.status;
+
+    // This checks to see if they have a custom status and a game at the same time
+    if(newPresence.activities.length > 1) {
+        newActivitiy = newPresence.activities[1];
+        // If there game is the same as the last, don't send a message
+        if(newActivitiy.name === oldPresence.activities[1].name) return;
+
+    } else {
+        newActivitiy = newPresence.activities[0];
+    }
+   
+    // This checks for their custom status or game
+    if(newActivitiy.state !== null) {
+        whatTheyDoing = newActivitiy.state;
+    } else {
+        whatTheyDoing = newActivitiy.name;
+    }
+   
+    const user = bot.users.cache.get(userId); // Getting the user by ID.
+    const channel = bot.channels.cache.find(channel => channel.id === "948309482482573343"); // Getting a channel to send the message in
+
+    if(user && user.username === "Yikemlone") {
+        if(whatTheyDoing === "Bloons TD 6") {
+            user.send(user.username + " has changed staus to " + newStatus + " and is doing something with " + whatTheyDoing);
+        }
+    } else if(user) {
+        channel.send(user.username + " has changed staus to " + newStatus + " and is doing something with " + whatTheyDoing);
+    } else {
+        channel.send("User not found.");
+    };
+
+});
+
+
+// This is the bot logging in, we need this for the bot to work
 bot.login(process.env.TOKEN);

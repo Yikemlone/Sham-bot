@@ -1,7 +1,25 @@
 # Sham-bot
-Sham bot is a Discord bot using JavaScript.
+
+## Sham-bot is a Discord bot using JavaScript.
+This is developed in collaboration with HeIsMilkMan, JohnDev and Myself(Yikemlone).
+<br><br>
 
 ***NOTE: YOU NEED TO MAKE A ".env" FILE AND PUT IT IN YOUR REPO YOU PULL, IT WILL NEED TO HAVE THE TOKEN. DON'T UPLOAD THE ".env" FILE***
+<br><br>
+
+# Dependencies
+
+We are developing using Node.js, so have it installed before running the bot. If you don't have it installed, you can download it from here https://nodejs.org/en/
+
+The module we are using is:
+
+* discord.js
+
+The Documentation for discord.js is here https://discord.com/developers/docs/intro
+
+Here is another useful website https://discordjs.guide/#before-you-begin
+
+**Make sure you use "npm install" before you try to run the bot.**
 <br><br>
 
 # Styling
@@ -49,4 +67,4 @@ module.exports = {
 
 This is the template file I have added, if you change all the values on the right, it should work they way you want it too. 
 
-*Make sure you give to JavaScript file name something meaningful to command*
+*Make sure you give the JavaScript file name something meaningful to the command.*
